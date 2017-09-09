@@ -109,7 +109,7 @@
 	</style>
 </head>
 <body>
-	<img id="image2ascii" src="x.png" width="50" crossorigin="anonymous">
+	<img id="image2ascii" src="/screenshot/x.png" width="50" crossorigin="anonymous">
 	<pre id="asciiWrapper"></pre>
 	<canvas id="matrix"></canvas>
 
@@ -179,16 +179,25 @@
 			// nothing!
 		}
 
+		function exit() {
+			hideConsole();
+			hideMatrix();
+			showAscii();
+		}
+
 		function processInput(input) {
 			commands = {
 				'help': 'You can type: <br>&nbsp;<span class="red">bio</span> Short bio about myself.<br>&nbsp;<span class="red">social</span> Get in touch.<br>&nbsp;<span class="red">hobbies</span> Fun stuff.',
-				'bio': '&nbsp;<span class="blue">Experienced Android Developer with a demonstrated history of working in the computer software industry. Skilled in Python, PHP, Computer Science, C++, and Android. Strong engineering professional with a Bachelor of Science (BS) focused in Computer Engineering from Iran University of Science and Technology.</span>',
+				'bio': '&nbsp;<span class="blue">Experienced Android Developer with a demonstrated history of working in the computer software industry. Skilled in Python, PHP, Computer Science, C++, and Android. Strong engineering professional with a Bachelor of Science (BS) focused in Software Engineering from Iran University of Science and Technology.</span>',
 				'social': '<span class="blue">&nbsp;Twitter: <a href="#" target="_blank">@Farbod</a></span> <br><span class="blue">&nbsp;Github: &nbsp;<a href="#" target="_blank">@Farbod</a></span> <br>',
 				'hobbies': '&nbsp;<span class="blue">Coding, More coding and even more coding!</span>',
 				'ls': 'really?!',
 				'man': 'you won\'t find that here!',
 				'clear': function() {
 					return clear();
+				},
+				'exit': function() {
+					return exit();
 				},
 			}
 
@@ -283,6 +292,7 @@
 			var update, c, ctx, drops, font_size, alphabets;
 			var __g1 = 0;
 			var __hide = false;
+			var yyy = false;
 
 			// initial state
 			function showMatrix() {
@@ -357,7 +367,13 @@
 			window.addEventListener("resize", function() {
 				if (update != null) {
 					clearInterval(update);
-					showMatrix();				
+					if (!yyy) {
+					showMatrix();
+					}				
+				}
+				if (yyy) {
+					$('#asciiWrapper').html('');
+					showAscii();
 				}
 			});
 
@@ -432,17 +448,18 @@
 
 			}();
 
-			// $(document).ready(function(){
-			// 	var __width = $(window).width();
-			// 	var __height = $(window).height();
-			// 	var wwidth = (__width >= __height) ? parseInt(__height/5) : parseInt(__width/5);
-			// 	var newImage = new imageConvert({
-			// 		width: wwidth,
-			// 		color: true,
-			// 		el: document.getElementById('image2ascii'),
-			// 		container: document.getElementById('wrapper')
-			// 	});
-			// });
+			function showAscii() {
+				var __width = $(window).width();
+				var __height = $(window).height();
+				var wwidth = (__width >= __height) ? parseInt(__height/5) : parseInt(__width/5);
+				var newImage = new imageConvert({
+					width: wwidth,
+					color: true,
+					el: document.getElementById('image2ascii'),
+					container: document.getElementById('asciiWrapper')
+				});
+				yyy = true;
+			}
 		</script>
 		<script type="text/javascript">
 
