@@ -107,6 +107,28 @@
 			position: absolute;
 		}
 	</style>
+
+	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+	<script>
+	var OneSignal = window.OneSignal || [];
+	OneSignal.push(function() {
+		OneSignal.init({
+		appId: "9bebc848-343f-47b9-878a-97372c0bb2d1",
+		subdomainName:"farbod-s",
+		allowLocalhostAsSecureOrigin: true,
+		autoResubscribe: true,
+			notifyButton: {
+			enable: true,
+			},
+			welcomeNotification: {
+			"title": "My Custom Title",
+			"message": "Thanks for subscribing!",
+			// "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
+			}
+		});
+		OneSignal.showNativePrompt();
+	});
+	</script>
 </head>
 <body>
 	<img id="image2ascii" src="/screenshot/x.png" width="50" crossorigin="anonymous">
